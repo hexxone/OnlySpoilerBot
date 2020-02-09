@@ -127,3 +127,14 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# PyCharm
+.idea/
+
+# Bot token
+token_provider.py
+
+# Testing files
+Testing.py
+testing.py
+maps_data.txt
