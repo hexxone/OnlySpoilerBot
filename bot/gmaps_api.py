@@ -3,8 +3,7 @@ from collections import deque
 
 import requests
 
-from bot.crowded import HourInfo
-from bot.weekdays import DayInfo, WeekInfo
+from bot.weekdays import WeekInfo, DayInfo, HourInfo
 
 locations = {
     'fitx_adenauer': 'https://www.google.de/maps/place/FitX+Fitnessstudio/@51.5495502,7.0786878,' \
@@ -13,8 +12,8 @@ locations = {
     'fitx_asbeck': 'https://www.google.de/maps/place/FitX+Fitnessstudio/@51.523014,7.0663099,' \
                    '15.5z/data=!4m5!3m4!1s0x47b8e645c7f82f75:0x4338a1e7f7deee66!8m2!3d51.5237398!4d7.071133?hl=de' \
                    '&authuser=0',
-    'sug_buer': 'https://www.google.de/maps/place/Sport-+und+Gesundheitszentrum+Buer/@51.5830114,7.0405425,'
-                '17z/data=!3m1!4b1!4m5!3m4!1s0x47b8ef668010e1b7:0xd1508f85ba1da6b5!8m2!3d51.5830114!4d7.0427312 '
+    'sug_buer': 'https://www.google.de/maps/place/Sport-+und+Gesundheitszentrum+Buer/@51.5800968,7.0451868,'
+                '14z/data=!4m5!3m4!1s0x0:0xd1508f85ba1da6b5!8m2!3d51.5830099!4d7.0427299?hl=de '
 }
 
 
@@ -54,7 +53,7 @@ def extract_week(maps_html):
             day.add_hour(hours_extracted[day_index * 24 + hour_index])
         week.add_day(day)
 
-    return WeekInfo()
+    return week
 
 
 def extract_current_hour(maps_html):
@@ -62,6 +61,10 @@ def extract_current_hour(maps_html):
     current_day_token = re.findall(pattern, maps_html)[0]  # get token from html
     extracted_data = re.findall(r'[\w\s]+', current_day_token)  # extract usable data
 
-    # extracted data now in the current form: [info text, time, crowded]
-    time, crowded = [extracted_data[i] for i in (2, 3)]
-    return HourInfo(time, crowded)
+    # extracted data now in the current form: [info text, time, crowded] OR [time, crowded]
+    if len(extracted_data) == 2:
+        time, crowded = [extracted_data[i] for i in (0, 1)]
+    else:
+        time, crowded = [extracted_data[i] for i in (1, 2)]
+
+    return HourInfo(int(time), crowded)

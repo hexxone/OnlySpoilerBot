@@ -1,6 +1,6 @@
 import datetime
 from bot.gmaps_api import get_html, extract_current_hour, extract_week
-from bot.weekdays import HourInfo, DayInfo, WeekInfo
+from bot.weekdays import WeekInfo, HourInfo, DayInfo
 
 
 class CrowdedInfo:

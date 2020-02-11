@@ -15,12 +15,12 @@ Weekdays = [
 class HourInfo:
     """data which can be assigned to one hour"""
 
-    def __init__(self, time, crowded):
+    def __init__(self, time: int, crowded):
         self.time = time
         self.crowded = crowded
 
     def __str__(self):
-        return "[" + self.time + ", " + self.crowded + "]"
+        return "[" + str(self.time) + ", " + self.crowded + "]"
 
 
 class DayInfo:
@@ -42,7 +42,7 @@ class DayInfo:
     def add_hour(self, info: HourInfo):
         self.hours.append(info)
 
-    def get_hour(self, hour):
+    def get_hour(self, hour: int):
         return self.hours[hour]
 
 

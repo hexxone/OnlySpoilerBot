@@ -3,7 +3,6 @@ import sys
 
 from telegram.ext import Updater, CommandHandler
 
-from bot.crowded import CrowdedInfo
 from bot.bot_token_provider import get_token
 from bot.workout_state_dialog import handle_user_input
 
@@ -17,7 +16,8 @@ logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s
 
 
 def location(update, context):
-    all_locations = []
+    from bot.gmaps_api import locations
+    all_locations = str(list(locations.keys()))
     context.bot.send_message(chat_id=update.effective_chat.id, text=all_locations)
 
 
@@ -35,4 +35,5 @@ def workout_state(update, context):
 workout_state_handler = CommandHandler('wievoll', workout_state)
 location_handler = CommandHandler('locations', location)
 dispatcher.add_handler(workout_state_handler)
+dispatcher.add_handler(location_handler)
 updater.start_polling()

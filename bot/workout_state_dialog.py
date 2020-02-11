@@ -2,7 +2,6 @@ from bot.crowded import CrowdedInfo
 
 
 def handle_user_input(args):
-
     if args[0] == "jetzt":
         location = args[1]
 
@@ -15,3 +14,5 @@ def handle_user_input(args):
 
         crowded_info = CrowdedInfo(location)
         response = crowded_info.get_crowded(weekday, time)
+
+    return response
