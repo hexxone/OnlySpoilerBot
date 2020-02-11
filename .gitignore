@@ -132,7 +132,7 @@ dmypy.json
 .idea/
 
 # Bot token
-bot/token_provider.py
+bot/bot_token_provider.py
 
 # Testing files
 bot/testing.py

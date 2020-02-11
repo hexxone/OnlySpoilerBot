@@ -1,0 +1,40 @@
+import datetime
+from bot.gmaps_api import get_html, extract_current_hour, extract_week
+from bot.weekdays import HourInfo, DayInfo, WeekInfo
+
+
+class CrowdedInfo:
+    """This class provides functions for accessing how crowded a place is on google maps of a specific location"""
+
+    weekdays = [
+        'Montag',
+        'Dienstag',
+        'Mittwoch',
+        'Donnerstag',
+        'Freitag',
+        'Samstag',
+        'Sonntag'
+    ]
+
+    def __init__(self, location):
+        maps_html = get_html(location)
+        self.week: WeekInfo = extract_week(maps_html)
+        self.current_time: HourInfo = extract_current_hour(maps_html)
+
+    def get_crowded(self, day: DayInfo, hour: int):
+        day_index: int = self.weekdays.index(day)
+        day_info: DayInfo = self.week.get_day(day_index)
+        hour_info: HourInfo = day.get_hour(hour)
+        response = f'Am {day_info.name} zwischen {hour_info.time}:00 und {hour_info.time + 1}:00 ist es zu {hour_info.crowded}% voll.'
+        return response
+
+    def get_current_crowded(self):
+        day_index = datetime.datetime.today().weekday()
+        day_info: DayInfo = self.week.get_day(day_index)
+
+        # get historical time info for the current situation for comparison
+        statistic_hour_info: HourInfo = day_info.get_hour(self.current_time.time)
+        hour_info: HourInfo = self.current_time
+        response = f'Jetzt gerade ist es zu {hour_info.crowded}% voll.' \
+                   f'Normalerweise ist es am {day_info.name} zu dieser Zeit zu {statistic_hour_info.crowded}% voll.'
+        return response
