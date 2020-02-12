@@ -21,8 +21,8 @@ def get_html(location):
     """Takes a url and returns the html-get-response as utf-8 string"""
     url = locations[location]
     ret = requests.get(url, {}).text
-    # with open('maps_data.txt', 'r+', encoding='utf-8') as file:
-    #     file.write(ret)
+    with open('maps_data.txt', 'r+', encoding='utf-8') as file:
+        file.write(ret)
     return ret
 
 
@@ -43,7 +43,7 @@ def extract_week(maps_html):
 
         # extracted data now in the current form: [time, crowded, ...]
         time, crowded = [hour_extracted[i] for i in (0, 1)]
-        hours_extracted.append(HourInfo(time, crowded))
+        hours_extracted.append(HourInfo(int(time), crowded))
 
     # add hours to weekdays and put in weekday object
     week = WeekInfo()
@@ -68,3 +68,6 @@ def extract_current_hour(maps_html):
         time, crowded = [extracted_data[i] for i in (1, 2)]
 
     return HourInfo(int(time), crowded)
+
+
+# extract_week(get_html('sug_buer'))
