@@ -11,7 +11,7 @@ Build the image with
 
 ### Compose
 
-First, edit .env file
+First, edit your bot token in .env file
 
 With debugging:
 ```bash
@@ -40,9 +40,6 @@ For production:
 docker run --name bot -v /home/docker/ReinhardtBot/persistent_data:/usr/src/ReinhardtBot/persistent_data -e BOT_TOKEN=<YOUR TOKEN> --detach onlyspoilerbot:0.1
 ```
 
-## Build & Run from Source
-
-TODO
 
 # Documentation
 
