@@ -1,0 +1,7 @@
+verion '3'
+services:
+    onlySpoilerBot:
+        container_name: onlySpoilerBot
+        build: .
+        environment: 
+            BOT_TOKEN: ${BOTTOKEN}

@@ -1,6 +1,7 @@
 # ReinhardtBot
 
-A telegram bot just for shits and giggles.
+A telegram bot just for spoilers.
+Because others won't do :>
 
 ## Build & Run with Docker
 
@@ -8,20 +9,35 @@ The Dockerfile will automatically set up the environment.
 
 Build the image with 
 
+### Compose
+
+First, edit .env file
+
+With debugging:
 ```bash
-docker image build -t reinhardtbot:0.1 .
+docker-compose up
 ```
 
-Start the container with (for debugging)
-
+For production:
 ```
-docker run -it --name bot -v /home/docker/ReinhardtBot/persistent_data:/usr/src/ReinhardtBot/persistent_data -e BOT_TOKEN=<YOUR TOKEN> -e TENOR_API_KEY=<YOUR TENOR API KEY> reinhardtbot:0.1
+docker-compose up -d
 ```
 
-(for production)
 
+### Vanilla
+
+```bash
+docker image build -t onlyspoilerbot:0.1 .
 ```
-docker run --name bot -v /home/docker/ReinhardtBot/persistent_data:/usr/src/ReinhardtBot/persistent_data -e BOT_TOKEN=<YOUR TOKEN> -e TENOR_API_KEY=<YOUR TENOR API KEY> --detach reinhardtbot:0.1
+
+With debugging:
+```
+docker run -it --name bot -v /home/docker/ReinhardtBot/persistent_data:/usr/src/ReinhardtBot/persistent_data -e BOT_TOKEN=<YOUR TOKEN> onlyspoilerbot:0.1
+```
+
+For production:
+```
+docker run --name bot -v /home/docker/ReinhardtBot/persistent_data:/usr/src/ReinhardtBot/persistent_data -e BOT_TOKEN=<YOUR TOKEN> --detach onlyspoilerbot:0.1
 ```
 
 ## Build & Run from Source
@@ -36,7 +52,4 @@ This bot is based on Python 3.8 and implemented according to the [Google Python 
 
 | /help         | Show Help                                 |
 | ------------- | ----------------------------------------- |
-| /locations    | All Places                                |
-| /wievoll      | Wie voll ist es zu einer bestimmten Zeit? |
-| /wievolljetzt | Wie voll ist es jetzt gerade?             |
-| /setlocation  | Set your personal location                |
+| /spoiler      | Do the thing, Larry                       |
