@@ -2,10 +2,10 @@ FROM python:3.7
 RUN pip3 install python-telegram-bot --upgrade
 RUN pip3 install requests
 WORKDIR /usr/src
-RUN git clone https://github.com/ReinhardtJ/ReinhardtBot.git
-WORKDIR ReinhardtBot
-ENV PYTHONPATH /usr/src/ReinhardtBot
+RUN mkdir bot
+COPY ./bot/* /usr/src/bot/
+WORKDIR /usr/src/bot
 RUN mkdir persistent_data
-VOLUME /usr/src/ReinhardtBot/persistent_data
-WORKDIR bot
+VOLUME /usr/src/bot/persistent_data
+ENV PYTHONPATH /usr/src
 CMD python3 main.py

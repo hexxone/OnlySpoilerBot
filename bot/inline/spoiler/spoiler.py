@@ -9,6 +9,10 @@ logger = logging.getLogger(__name__)
 
 def handle_inline_spoiler(update: tg.Update, context: tg_ext.CallbackContext):
     query = update.inline_query.query
+    
+    if(len(query) < 1):
+        return
+
     results = [
         tg.InlineQueryResultArticle(
             id=uuid.uuid4(),

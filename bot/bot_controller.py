@@ -5,8 +5,7 @@ import telegram.ext as tg_ext
 from telegram.ext import CommandHandler, InlineQueryHandler, CallbackQueryHandler
 
 from bot.api_tokens import TokenNotFoundError
-from bot.dialogs.popularity_dialog import start_popularity_dialog
-from bot.inline import inline
+import inline
 
 
 def start():
