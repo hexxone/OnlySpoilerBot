@@ -1,4 +1,6 @@
-# ReinhardtBot
+# OnlySpoilerBot
+
+### Credits to: ReinhardtBot
 
 A telegram bot just for spoilers.
 Because others won't do :>

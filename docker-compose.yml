@@ -1,7 +1,7 @@
-verion '3'
+version: '3'
 services:
-    OnlySpoilerBot:
-        container_name: OnlySpoilerBot
+    onlyspoilerbot:
+        container_name: onlyspoilerbot
         build: .
         environment: 
-            BOT_TOKEN: ${BOTTOKEN}
+            - 'BOT_TOKEN=${BOTTOKEN}'
